@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: config
+
+  # 建立远程仓库 用于访问配置文件 并获取配置文件中的值  当本地与配置中心的配置文件相同时，系统默认优先使用配置管理中心所提供的配置
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/Gitfanlei/base-config-repo.git
+          username: 819495591@qq.com
+          password: fanlei1994812
+          search-paths: base-config-repo
+  # 注意 每个在github上的配置文件的格式事固定的（否则可能无法访问）  git中文件标准格式格式     {application}-{profile}.yml    模块应用名(config,hystrix)-环境名(git-文件后半段,application,bootstrap)
+  # uri: http://git.oschina.net/zhihaomiao/{application}-config  配置文件的调用方式
+  #  此处一定要根据rabbitmq主页上的listening ports 来填写监听端口，并且不需要加前缀 amqp 或者 http 高版本tomcat可以自动解析，否则会出现socket close 或者 无法解析前缀等问题
+  rabbitmq:
+    addresses: localhost:5672
+    username: fanlei
+    password: fanlei
+    publisher-confirms: true
+    publisher-returns: true
+    virtual-host: /
+
+# 局域网访问需要修改 window防火墙 入站规则 添加指定端口
+
+
+#    # hystrix 远程调用 实例
+#    spring:
+#      application:
+#        name: hystrix      # eureka 注册名
+#
+#
+#    # 如何调用远程仓库中的配置文件  注意 主程序中@EnableClientDiscovery  用于发现其他端口,很重要    注意github中文件的名字通常由两部分构成 注册名-环境名(git文件后半段)
+#      cloud:
+#        config:
+#          uri: http://localhost:8080/
+#          profile: application    #
+#          label: master
+#
+#    # 如果要调用远程github仓库 需要在bootstrap中提前建立建立本服务器的port
+#    server:
+#      port: 7979

@@ -1,0 +1,36 @@
+server:
+  port: 8989
+
+management:
+  endpoint:
+    restart:
+      enabled: true
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: [hystrix.stream,turbine.stream]
+
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.web: DEBUG
+
+# 连接服务注册中心
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+# 多个微服务监控配置
+turbine:
+  appConfig: eureka,hystrix,turbine
+  aggregator:
+    clusterConfig: default
+  clusterNameExpression: new String("default")
+
+
+

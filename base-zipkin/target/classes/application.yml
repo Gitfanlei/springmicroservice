@@ -1,0 +1,17 @@
+server:
+  port: 9000
+
+
+#建立数据源
+spring:
+  datasource:
+    schema: classpath:/mysql_init.sql
+    url: jdbc:mysql://localhost:3306/myzipkin?serverTimezone=UTC
+    username: root
+    password: 1994
+  sleuth:
+    enabled: false
+  main:
+    allow-bean-definition-overriding: true
+
+

@@ -1,0 +1,26 @@
+server:
+  port: 7979
+
+# eureka 服务器 注册链接
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.web: DEBUG
+
+management:
+  endpoint:
+    restart:
+      enabled: true
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: [hystrix.stream,turbine.stream]   # 此配置 是为了实现 各个服务的监控，否则会无法连接

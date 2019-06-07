@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: turbine
+
+# 云配置中心
+  cloud:
+    config:
+      uri: http://localhost:8081
+#      profile: application
+#      label: master
+
+  rabbitmq:
+    addresses: localhost:5672
+    username: fanlei
+    password: fanlei
+    publisher-confirms: true
+    publisher-returns: true
+    virtual-host: /
+
+#server:
+#  port: 8989
